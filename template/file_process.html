@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin-2.min.css' %}">    
+    <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div id="wrapper" >
+        <ul class="navbar-nav  sidebar accordion" id="accordionSidebar"  style="border: 1px solid lightgray; border-top: none;display: flex;flex-direction: column;">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center mb-5" href="index.html" style="flex-direction: column;display: flex;" >
+                <!-- <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div> -->
+                <div class="sidebar-brand-text mx-3 d-flex  align-items-center p-0 " style="color:  rgb(74, 74, 192); justify-content: space-between; display: flex;">
+                    <div class="mr-3 header p-0" style="display: flex; flex-direction: column; align-items: center;">
+                        <div  class="header" >DNC</div>
+                        <div class="header" >DO NOT CALL</div>
+                    </div>
+                    <div class="mr-3 header p-0">
+                      
+                    </div>
+                   
+                </div>
+                <div class="sidebar-brand-text " style="color:  rgb(74, 74, 192);"> </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active " >
+                <a class="nav-link" href="{%url 'index'%}" style="color:gray">
+                    <i class="fas fa-home"></i>
+                    <span >Home</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item ">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo"  >
+                    <i class="fas fa-fw fa-cog" style="color: gray;"></i>
+                    <span class="mr-5" style="color: black;">History</span>
+                    <img src="{% static 'img/' %}" alt="">
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar"  >
+                    <div class="bg-light py-2 collapse-inner rounded" >
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="{% url 'buttons'%}">Buttons</a>
+                        <a class="collapse-item" href="{% url 'cards'%}">Cards</a>
+                    </div>
+                </div>
+            </li>
+
+            <script>
+                function redirectToReports() {
+                    window.location.href = "{% url 'reports' %}";
+                }
+            </script>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="redirectToReports()">
+                    <i class="fas fa-fw fa-chart-area" style="color: gray;"></i>
+                    <span style="color: black;">Reports</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'process_log' %}" >
+                    <i class="fas fa-fw fa-chart-area" style="color: gray;"></i>
+                    <span style="color: black;">Process Log</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'rule_manager' %}">
+                    <i class="fas fa-fw fa-table" style="color: gray;"></i>
+                    <span style="color: black;">Rule Manager</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="background-color: rgb(133, 48, 186);border-radius: 10px; margin:auto; color:white;" href="{%url 'file_process'%}">
+                    <i class="fas fa-file" style="color: white;"></i>
+                    <span style="color:white;">File Process</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+     
+        </ul>
+        <div class="body col-10 card shadow" style="display: flex; justify-content: space-around;align-items: center; " >
+         
+<!-- Your other HTML content here -->
+
+            {% if not success %}
+            <form method="POST" class="col-4 p-4  card-header" enctype="multipart/form-data" name="upload_file" action="{%url 'upload_file'%}"  style=" display: flex;
+            flex-direction: column;
+            height: 60%;
+            align-items: center;
+            justify-content: space-between;
+            /* background-color:  #fffbf3; */
+            color: #d7f1f5;
+            font-family: 'Lato', sans-serif; border-radius: 50px;box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;">
+                {% csrf_token %}
+                <h2 class="font-weight-bold" style="color:black" >Upload File</h2>
+                <div class="file-upload-wrapper" style="display: none;">
+                    <input type="file" name="myfile" width="100%">
+                     
+                    <button type="submit" name="upload_file"  style="width: 100px;" >Upload</button>
+                 </div>
+                 
+                 <div class="file-drop-area" style="  position: relative;
+                 display: flex;
+                 align-items: center;
+                 flex-direction: column;
+                 width: 450px;
+                 max-width: 100%;
+                 padding: 25px;
+                 border-radius: 3px;
+                 transition: 0.2s;">
+                    <input class="file-input" name="myfile" style="  position: absolute;
+                    left: 0;
+                    top: 0;
+                    height: 100%;
+                    width: 100%;
+                    cursor: pointer;
+                    opacity: 0;" type="file" multiple lang="en">
+                   
+                    <div class="mt-5 mb-5">
+                        <i class="fa fa-upload" aria-hidden="true" style="font-size: 5em;color: blue;"></i>
+                        <span class="file-message font-weight-bold" style="font-size: small;
+                        font-weight: 300;
+                        font-size: 20px;
+                        line-height: 10%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        color:black;
+                        text-overflow: ellipsis;">Drag and Drop Files Here</span>
+                    </div>
+                    <span  class="choose-file-button  mt-5 font-weight-bold"
+                    style="  flex-shrink: 0;
+                    background-color:#53abff;
+                    color: white;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 3px;
+                    padding: 8px 15px;
+                    margin-right: 10px;
+                    font-size: 12px;
+                    text-transform: uppercase;"
+                    >or Choose files</span>
+                  </div>
+                  <div  >
+                    <button class="font-weight-bold" type="submit" style="width: 200px;color:white;background-color: rgb(74, 74, 192);height: 35px;border: none;" name="upload_file"  width="200px" onclick="submitForm()">Upload</button>
+                  </div>
+                  {% if success %}
+                    <p class="text-success" style="color: black;">{{ success }}</p>
+                  {% endif %}
+                  {% if error %}
+                    <p class="text-danger">{{ error }}</p>
+                  {% endif %}
+                    {% if error2 %}
+                        <p class="text-danger">{{ error2 }}</p>
+                    {% endif %}
+        
+                 
+                         
+            </form>
+            {% endif %}
+                {% if success %}
+                <div  class="col-4 p-4  card-header"  style=" display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 60%;
+                align-items: center;
+                justify-content: space-between;
+                /* background-color:  #fffbf3; */
+                color: white;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                font-family: 'Lato', sans-serif; border-radius: 50px;">
+                   <h2 class="mb-0 font-weight-bold" style="color:black">Download File</h2>
+                    <div class="dropdown no-arrow mt-0 mb-5 ">
+                        <a class="dropdown-toggle" href="#" style="display: flex;flex-direction: column; align-items: center;justify-content: center;" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-download mb-5 " aria-hidden="true" style="font-size: 5em;color: blue;"></i>
+                            <button class="mt-5 font-weight-bold" style="width: 200px;height: 35px;border: none;color:white;background-color:#53abff;"> Choose Files</button>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                            aria-labelledby="dropdownMenuLink">
+                            <div class="dropdown-header font-weight-bold">Choose Files:</div>
+                            {% for file in files%}
+                          
+                                <span class="dropdown-item" name="file_name" >{{file}}</span>
+                                
+                                <a href="{% url 'download_file' file_name=file|urlencode %}" name="download_file" style="color: black">Download</a>
+                            {%endfor%}
+                        </div>
+                    </div>
+                  
+                </div>
+                {% endif %}
+
+        </div>
+    </div>
+    <script>
+        function submitForm() {
+            var form = document.querySelector('form[name="upload_file"]');
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+    
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            alert('Dosya başarıyla yüklendi!');
+                        } else {
+                            alert('Hata: ' + response.error);
+                        }
+                    } else {
+                        alert('Hata oluştu.');
+                    }
+                }
+            };
+    
+            xhr.open('POST', form.action);
+            xhr.setRequestHeader('X-CSRFToken', form.elements.csrfmiddlewaretoken.value);
+            xhr.send(formData);
+        }
+    </script>
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+        var fileInput = document.querySelector('.file-input');
+        var textbox = document.querySelector('.file-message');
+        
+        fileInput.addEventListener('change', function() {
+        var filesCount = this.files.length;
+        
+        if (filesCount === 1) {
+            var fileName = this.value.split('\\').pop();
+            textbox.textContent = fileName;
+        } else {
+            textbox.textContent = filesCount + ' files selected';
+        }
+        });
+    });
+    </script>
+  
+    <script src="{% static 'static/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{%static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
